@@ -1,0 +1,55 @@
+#include <iostream>
+
+int main()
+{
+	int lowerBound, upperBound, excludeStart, excludeEnd;
+
+	// Ask the user to enter the first range boundaries
+	std::cout << "Enter lower bound number: ";
+	std::cin >> lowerBound;
+	// Validate that upper bound is greater than lower bound
+	do
+	{
+		std::cout << "Enter upper bound number: ";
+		std::cin >> upperBound;
+		if (upperBound <= lowerBound)
+			std::cout << "This number needs to be greater than previous one. Try again!\n";
+	} while (upperBound <= lowerBound);
+
+	std::cout << "Now you need to enter two numbers (they must be inside the first range)\n";
+
+	//Ask to enter first number (check if it's inside the range)
+	do
+	{
+		std::cout << "Enter first number: ";
+		std::cin >> excludeStart;
+		if (excludeStart <= lowerBound || excludeStart >= upperBound - 1)
+			std::cout << "This number must be greater than " << lowerBound << " and less than " << upperBound - 1 << std::endl;
+	} while (excludeStart <= lowerBound || excludeStart >= upperBound - 1);
+
+	//Ask to enter second number (check if it's inside the range)
+	do
+	{
+		std::cout << "Enter second number: ";
+		std::cin >> excludeEnd;
+		if (excludeEnd >= upperBound || excludeEnd <= excludeStart)
+			std::cout << "This number must be greater than " << excludeStart << " and less than " << upperBound << std::endl;
+	} while (excludeEnd <= excludeStart || excludeEnd >= upperBound);
+
+	int number = lowerBound;
+
+	std::cout << "\nHere it is: \n";
+
+	//Print all numbers from first range except those inside second range
+
+	do
+	{
+		if (number < excludeStart || number > excludeEnd)
+			std::cout << number << std::endl;
+		number++;
+	} while (number <= upperBound);
+
+	std::cout << "\nTask is completed!\n";
+
+	return 0;
+}
